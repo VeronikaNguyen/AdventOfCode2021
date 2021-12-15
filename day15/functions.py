@@ -9,8 +9,8 @@ def expand_the_map(risk_map: np.ndarray, expansion_rate: int) -> np.ndarray:
     for i in range(expansion_rate):
         for j in range(expansion_rate):
             expansion_map[
-                i * risk_map.shape[0] : (i + 1) * risk_map.shape[0] :,
-                j * risk_map.shape[1] : (j + 1) * risk_map.shape[1],
+                i * risk_map.shape[0]: (i + 1) * risk_map.shape[0]:,
+                j * risk_map.shape[1]: (j + 1) * risk_map.shape[1],
             ] = (risk_map + np.ones_like(risk_map) * (i + j)) // 10 + (
                 (risk_map + np.ones_like(risk_map) * (i + j)) % 10
             )
