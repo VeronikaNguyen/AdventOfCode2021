@@ -25,4 +25,3 @@ def simulate_lanternfish_population(population_timer: Dict[int, int], time: int)
     for t in range(9):
         population += population_timer[t]
     return population
-

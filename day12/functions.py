@@ -9,7 +9,7 @@ def DFS(
     current_node: str,
     paths: Dict[str, List],
     paths_counter: int,
-    visited_nodes: Set[str]
+    visited_nodes: Set[str],
 ) -> int:
     if current_node.islower():
         visited_nodes.add(current_node)
@@ -32,7 +32,7 @@ def DFS_visiting_small_caves_twice(
     paths: Dict[str, List],
     paths_counter: int,
     visited_nodes: Set[str],
-    small_cave_visited_twice: bool
+    small_cave_visited_twice: bool,
 ) -> int:
     if current_node.islower():
         visited_nodes.add(current_node)
@@ -46,15 +46,11 @@ def DFS_visiting_small_caves_twice(
                 paths,
                 paths_counter,
                 copy.deepcopy(visited_nodes),
-                small_cave_visited_twice
+                small_cave_visited_twice,
             )
         elif not small_cave_visited_twice and neighbour != "start":
             paths_counter = DFS_visiting_small_caves_twice(
-                neighbour,
-                paths,
-                paths_counter,
-                copy.deepcopy(visited_nodes),
-                True
+                neighbour, paths, paths_counter, copy.deepcopy(visited_nodes), True
             )
     return paths_counter
 

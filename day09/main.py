@@ -6,11 +6,11 @@ from functions import (
 
 
 if __name__ == "__main__":
-    heightmap = read_from_file("day9")
+    height_map = read_from_file("day9")
 
     print("Solution part 1:")
-    risk_level, sinks = count_risk_level(heightmap)
+    risk_level, sinks = count_risk_level(height_map)
     print(risk_level)
 
     print("\nSolution part 2:")
-    print(find_largest_basin(heightmap, sinks))
+    print(find_largest_basin(height_map, sinks))

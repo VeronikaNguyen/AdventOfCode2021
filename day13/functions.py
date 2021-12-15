@@ -45,7 +45,7 @@ def fold_paper(paper: np.ndarray, fold_axis: str, fold_idx: int) -> np.ndarray:
         for i in range(fold_idx + 1, paper.shape[0]):
             folded_paper[fold_idx - i, :] += paper[i, :]
     else:
-        folded_paper = paper[fold_idx + 1:, :]
+        folded_paper = paper[fold_idx + 1 :, :]
         for i in range(fold_idx):
             folded_paper[i, :] += paper[fold_idx - i - 1, :]
 
