@@ -1,3 +1,5 @@
+from queue import PriorityQueue
+
 import numpy as np
 
 
@@ -18,13 +20,15 @@ def expand_the_map(risk_map: np.ndarray, expansion_rate: int) -> np.ndarray:
 
 
 def find_lowest_risk(risk_map: np.ndarray) -> int:
-    queue = [(1, 0), (0, 1)]
+    queue = PriorityQueue()
+    queue.put((risk_map[(1, 0)], (1, 0)))
+    queue.put((risk_map[(0, 1)], (0, 1)))
     cumulated_risk = np.matrix(np.ones_like(risk_map) * np.inf)
     cumulated_risk[(0, 1)] = risk_map[(0, 1)]
     cumulated_risk[(1, 0)] = risk_map[(1, 0)]
     neighbours = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-    while len(queue) != 0:
-        node = queue.pop(0)
+    while not queue.empty():
+        node = queue.get()[1]
         for d in neighbours:
             neighbour = (node[0] + d[0], node[1] + d[1])
             if (
@@ -41,7 +45,7 @@ def find_lowest_risk(risk_map: np.ndarray) -> int:
                     cumulated_risk[neighbour] = (
                         cumulated_risk[node] + risk_map[neighbour]
                     )
-                    queue.append(neighbour)
+                    queue.put((cumulated_risk[neighbour], neighbour))
     return int(cumulated_risk[-1, -1])
 
 
