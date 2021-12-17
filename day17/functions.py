@@ -39,6 +39,11 @@ def find_highest_y_position(x_range: List[int], y_range: List[int]) -> int:
     return y_max
 
 
+def find_highest_y_position_fast(y_range: List[int]) -> int:
+    y_max = (y_range[0] + 1) * y_range[0] // 2
+    return y_max
+
+
 def read_from_file(filename: str) -> (List[int], List[int]):
     with open(filename) as f:
         data = f.readline().rstrip().split(" ")
