@@ -18,10 +18,9 @@ def apply_convolution(
     new_image = np.array(image)
     padding_constant = "0"
     for s in range(steps):
-        print(s)
         image = np.array(new_image)
         image = np.pad(
-            image, [(3, 3), (3, 3)], mode="constant", constant_values=padding_constant
+            image, [(2, 2), (2, 2)], mode="constant", constant_values=padding_constant
         )
         new_image = np.array(image)
         for i in range(image.shape[0]):
