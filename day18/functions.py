@@ -3,9 +3,7 @@ from typing import List
 from typing import Union
 
 
-def add_snailfish_list(
-    snailfish_list: List[List[Union[int, str]]]
-) -> int:
+def add_snailfish_list(snailfish_list: List[List[Union[int, str]]]) -> int:
     snailfish_result = snailfish_list[0]
     for snailfish in snailfish_list[1:]:
         snailfish_result = add_snailfish_pair(snailfish_result, snailfish)
@@ -43,20 +41,22 @@ def add_snailfish_pair(
     return snailfish_result
 
 
-def compute_largest_magnitude_pair(
-    snailfish_list: List[List[Union[int, str]]]
-) -> int:
+def compute_largest_magnitude_pair(snailfish_list: List[List[Union[int, str]]]) -> int:
     largest_magnitude = 0
     for i1 in range(len(snailfish_list)):
         for i2 in range(i1 + 1, len(snailfish_list)):
             magnitude = compute_magnitude(
                 add_snailfish_pair(snailfish_list[i1], snailfish_list[i2])
             )
-            largest_magnitude = magnitude if magnitude > largest_magnitude else largest_magnitude
+            largest_magnitude = (
+                magnitude if magnitude > largest_magnitude else largest_magnitude
+            )
             magnitude = compute_magnitude(
                 add_snailfish_pair(snailfish_list[i2], snailfish_list[i1])
             )
-            largest_magnitude = magnitude if magnitude > largest_magnitude else largest_magnitude
+            largest_magnitude = (
+                magnitude if magnitude > largest_magnitude else largest_magnitude
+            )
     return largest_magnitude
 
 
@@ -72,7 +72,7 @@ def compute_magnitude(snailfish_result: List[Union[int, str]]) -> int:
         if isinstance(last_letter, int) and isinstance(letter, int):
             magnitude = last_letter * 3 + letter * 2
             snailfish_result[i - 2] = magnitude
-            del snailfish_result[i - 1: i + 2]
+            del snailfish_result[i - 1 : i + 2]
             i = i - 2
             letter = snailfish_result[i]
         last_letter = letter
@@ -119,5 +119,5 @@ def split(snailfish: List[Union[int, str]], index: int) -> List[Union[int, str]]
     num1 = math.floor(num / 2)
     num2 = math.ceil(num / 2)
     del snailfish[index]
-    snailfish[index : index] = "[", num1, num2, "]"
+    snailfish[index:index] = "[", num1, num2, "]"
     return snailfish
