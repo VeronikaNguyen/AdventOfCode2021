@@ -1,8 +1,6 @@
 import copy
 from typing import List
 
-import numpy as np
-
 
 def play_game_with_deterministic_dice(positions: List[int]) -> int:
     die_role = 0
@@ -63,7 +61,9 @@ def simulate_quantum_dice(
             new_scores[idx] += 10
         else:
             new_scores[idx] += new_positions[idx]
-        wins = simulate_quantum_dice(new_positions, new_scores, wins, idx, new_possibilities)
+        wins = simulate_quantum_dice(
+            new_positions, new_scores, wins, idx, new_possibilities
+        )
     return wins
 
 
