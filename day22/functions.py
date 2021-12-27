@@ -8,7 +8,7 @@ import numpy as np
 
 def count_lit_cubes_inside_region(
     instructions: List[List[Union[int, List[int]]]],
-    forbidden_intervals: List[List[List[Union[int, float]]]]
+    forbidden_intervals: List[List[List[Union[int, float]]]],
 ) -> int:
     lit_intervals = light_cubes_inside_region(instructions, forbidden_intervals)
     lit_cubes = 0
@@ -20,7 +20,7 @@ def count_lit_cubes_inside_region(
 def get_volume(interval: List[List[int]]) -> int:
     volume = 1
     for i in range(3):
-        volume *= (interval[i][1] - interval[i][0] + 1)
+        volume *= interval[i][1] - interval[i][0] + 1
     return volume
 
 
@@ -49,11 +49,17 @@ def get_volume_of_intervals(intervals: List[List[int]]) -> int:
         y_idx[y].append(i)
     for i, z in enumerate(z_intervals):
         z_idx[z].append(i)
-    cube = np.ones(shape=(len(x_intervals) - 1, len(y_intervals) - 1, len(z_intervals) - 1))
+    cube = np.ones(
+        shape=(len(x_intervals) - 1, len(y_intervals) - 1, len(z_intervals) - 1)
+    )
     for i in range(3, len(intervals), 3):
         for x in range(x_idx[intervals[i][0]][0], x_idx[intervals[i][1]][-1]):
-            for y in range(y_idx[intervals[i + 1][0]][0], y_idx[intervals[i + 1][1]][-1]):
-                for z in range(z_idx[intervals[i + 2][0]][0], z_idx[intervals[i + 2][1]][-1]):
+            for y in range(
+                y_idx[intervals[i + 1][0]][0], y_idx[intervals[i + 1][1]][-1]
+            ):
+                for z in range(
+                    z_idx[intervals[i + 2][0]][0], z_idx[intervals[i + 2][1]][-1]
+                ):
                     cube[x, y, z] = 0
 
     for x in range(cube.shape[0]):
@@ -95,11 +101,18 @@ def intersect_intervals(
 ) -> (Optional[List[List[int]]], Optional[List[List[int]]]):
     intersection_interval = [[] for _ in range(3)]
     for i in range(3):
-        if unchanged_interval[i][0] > cut_interval[i][1] or unchanged_interval[i][1] < cut_interval[i][0]:
+        if (
+            unchanged_interval[i][0] > cut_interval[i][1]
+            or unchanged_interval[i][1] < cut_interval[i][0]
+        ):
             return cut_interval
 
-        intersection_interval[i].append(max(cut_interval[i][0], unchanged_interval[i][0]))
-        intersection_interval[i].append(min(cut_interval[i][1], unchanged_interval[i][1]))
+        intersection_interval[i].append(
+            max(cut_interval[i][0], unchanged_interval[i][0])
+        )
+        intersection_interval[i].append(
+            min(cut_interval[i][1], unchanged_interval[i][1])
+        )
 
     if get_volume(intersection_interval) == get_volume(cut_interval):
         return None
@@ -108,7 +121,7 @@ def intersect_intervals(
 
 def light_cubes_inside_region(
     instructions: List[List[Union[int, List[int]]]],
-    forbidden_intervals: List[List[List[Union[int, float]]]]
+    forbidden_intervals: List[List[List[Union[int, float]]]],
 ) -> List[List[List[int]]]:
     lit_intervals = []
     for i, instruction in enumerate(reversed(instructions)):

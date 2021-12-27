@@ -1,0 +1,62 @@
+There are 14 instruction blocks of the following form
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z d
+add x a
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y b
+mul y x
+add z y
+
+where a, b, and d vary in each block (a, b are integers and d is either 1 or 26).
+Consider z as a number in base 26.
+Then each block is equivalent to the following instructions:
+
+read current number and store into w
+if the last digit of z + a does not equal w:
+    z = 26 * z + w + b
+    
+if d equals 26:
+    remove the last digit of z
+    
+a, b and d have the following values:
+
+a:   14   15   12   11   -5   14   15  -13  -16   -8   15   -8    0   -4
+b:   12    7    1    2    4   15   11    5    3    9    2    3    3   11
+d:    1    1    1    1   26   1     1   26   26   26    1   26   26   26
+
+
+This if-condition "if the last digit of z + a does not equal w" condition is not met for 7 blocks. 
+In order to reach zero for the remaining 7 blocks the if condition has to be met. 
+Thus, we obtain the following equations from the if-condition:
+
+We denote the i-th input number by n_i:
+n_5 = n_4 - 3
+n_8 = n_7 - 2
+n_9 = n_6 - 1
+n_10 = n_3 - 7
+n_12 = n_11 - 6
+n_13 = n_2 + 7
+n_14 = n_1 + 8
+
+The rest is easy, we can choose n_i such that the the number n_1...n_14 is maximal/minimal.
+
+
+Solution part 1:
+
+12996997829399
+
+Solution part 2:
+
+11841231117189
