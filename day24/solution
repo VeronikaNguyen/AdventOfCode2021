@@ -37,8 +37,8 @@ b:   12    7    1    2    4   15   11    5    3    9    2    3    3   11
 d:    1    1    1    1   26   1     1   26   26   26    1   26   26   26
 
 
-This if-condition "if the last digit of z + a does not equal w" condition is not met for 7 blocks. 
-In order to reach zero for the remaining 7 blocks the if condition has to be met. 
+This if-condition "if the last digit of z + a does not equal w" condition is met for 7 blocks. 
+In order to reach zero for the remaining 7 blocks the if condition has to be not met. 
 Thus, we obtain the following equations from the if-condition:
 
 We denote the i-th input number by n_i:
